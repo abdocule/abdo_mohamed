@@ -1,5 +1,7 @@
-FROM openjdk:8
-WORKDIR /dir
-COPY  . /dir
-RUN javac Ma.java
-CMD ["java", "Ma"]
+FROM node:14-alpine
+WORKDIR /app
+COPY index.js package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 5000
+CMD node index.js

@@ -1,55 +1,53 @@
-import express from 'express';
-import { engine } from 'express-handlebars';
-const app = express();
-app.engine('handlebars',engine());
-app.set('view engine', 'handlebars');
-app.set('views', './templates');
+import express from "express";
+const app = new express();
 
-
-
-
-const students = [
+let students = [
     {
         id: 1,
         name: "mohamed",
-        city: "shbeen",
+        country: "shbeen",
     },
     {
         id: 2,
         name: "salah",
-        city: "banha",
+        country: "cairo",
     },
     {
         id: 3,
         name: "hamoda",
-        city: "cairo",
+        country: "tanta",
     },
     {
         id: 4,
         name: "elserougy",
-        city: "tanta",
-    },
-
+        country: "banha",
+    }
 ];
 
 
+app.get("/students", (req, res) => {
+    let output = "<ul>";
+    students.forEach((ele , indx) => {
+        const student = students[indx];
+        output += `<li><a href="/students/${student.id}">${student.name}</a></li>`;
+    });
+    output += "</ul>";
+    res.send(output);
+});
 
-const studentsfunction = (request, response) => {
-     response.render("students" , { layout:false , students});
 
-};
-
-
-app.get("/students", studentsfunction);
-
-app.get('/students/:id',(req ,res) =>{
+app.get("/students/:id", (req , res) => {
     const id = req.params.id;
 
-    const student = students.find((item)=>{
-        return item.id  == id ; 
-    })
-   
-    res.render("student", { layout: false , student });
+    const student = students.find((ele) => {
+        return ele.id == id;
+    });
+    res.send(`
+    <h4>${student.name}</h4>
+    <div>${student.country}</div>
+    <div>${student.id}</div>
+    `);
+    
 });
 
 
