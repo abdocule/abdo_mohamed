@@ -4,22 +4,22 @@ const app = new express();
 let students = [
     {
         id: 1,
-        name: "mohamed",
+        name: "abdo",
         country: "shbeen",
     },
     {
         id: 2,
-        name: "salah",
+        name: "mohamed",
         country: "cairo",
     },
     {
         id: 3,
-        name: "hamoda",
+        name: "essam",
         country: "tanta",
     },
     {
         id: 4,
-        name: "elserougy",
+        name: "hagog",
         country: "banha",
     }
 ];
